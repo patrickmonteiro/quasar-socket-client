@@ -1,4 +1,4 @@
-# W3 Texto Fala Desktop (w3-texto-fala-desktop)
+# W3 Texto Fala Desktop (quasar-socket-client)
 
 Projeto de texto fala desktop usando Electron + Socket.io
 

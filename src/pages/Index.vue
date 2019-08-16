@@ -1,6 +1,34 @@
 <template>
-  <q-page class="flex flex-center">
-    <img alt="Quasar logo" src="~assets/quasar-logo-full.svg">
+  <q-page class="container">
+    <div class="row q-px-md">
+      <q-input outlined v-model="user" class="col-12" label="NOME" />
+      <!-- <q-input outlined v-model="user" label="NOME" />
+      <q-input outlined v-model="message" label="MENSAGEM" />
+      <div class="col-12">
+        <q-btn label="emite evento" @click="sendMessage" />
+      </div> -->
+      <div class="col-12">
+          <q-scroll-area style="height: 60vh" ref="scroll">
+              <q-chat-message
+                :ref="`chat${index}`"
+                v-for="(msgRecebida, index) in messages" :key="index"
+                :name="msgRecebida.user"
+                :text="[msgRecebida.message]"
+                :sent="user === msgRecebida.user"
+              />
+            </q-scroll-area>
+        </div>
+    </div>
+    <div class="fixed-bottom, absolute-bottom">
+      <div class="row">
+        <div class="col-10">
+          <q-input outlined v-model="message" />
+        </div>
+        <div class="col-2">
+          <q-btn icon="send" class="full-width" size="lg" color="green-5" @click="sendMessage" />
+        </div>
+      </div>
+    </div>
   </q-page>
 </template>
 
@@ -9,6 +37,36 @@
 
 <script>
 export default {
-  name: 'PageIndex'
+  name: 'PageIndex',
+  mensagem: 'Mensagem enviada do vue!',
+  data () {
+    return {
+      user: '',
+      message: '',
+      messages: []
+    }
+  },
+  sockets: {
+    MESSAGE: function (data) {
+      this.messages = [...this.messages, data]
+      setTimeout(() => {
+        this.$refs.scroll.setScrollPosition(this.$refs.scroll.$el.clientHeight)
+      }, 100)
+      // // this.$refs.scroll.$el.scroolBottom = this.$refs.scroll.$el.scrollHeight
+      // console.log(this.$refs.scroll)
+      // var objDiv = document.getElementById('message)
+      // objDiv.scrollTop = objDiv.scrollHeight
+    }
+  },
+  methods: {
+    sendMessage (e) {
+      e.preventDefault()
+      this.$socket.emit('SEND_MESSAGE', {
+        user: this.user,
+        message: this.message
+      })
+      this.message = ''
+    }
+  }
 }
 </script>
