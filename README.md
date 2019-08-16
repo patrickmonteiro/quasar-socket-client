@@ -1,6 +1,6 @@
-# W3 Texto Fala Desktop (quasar-socket-client)
+# Quasar socket client (quasar-socket-client)
 
-Projeto de texto fala desktop usando Electron + Socket.io
+Projeto de chat com acessibilidade usando Quasar framework e socket.io
 
 ## Install the dependencies
 ```bash
