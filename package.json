@@ -2,7 +2,7 @@
   "name": "quasar-socket-client",
   "version": "0.0.1",
   "description": "Projeto de chat",
-  "productName": "W3 Texto Fala Desktop",
+  "productName": "Vue Norte Chat",
   "cordovaId": "org.cordova.quasar.app",
   "author": "eng.patrickmonteiro@gmail.com",
   "private": true,
